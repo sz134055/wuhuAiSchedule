@@ -77,12 +77,13 @@ let reqest = async (method,body,url,header)=>{
 /**
  * 时间配置函数，此为入口函数，不要改动函数名
  */
-async function scheduleTimer() {
-  
-    let time = "https://ehall.uwh.edu.cn/jwapp/sys/wdkb/modules/jshkcb/jc.do"
+async function scheduleTimer({
+    providerRes,
+    parserRes
+}) {
+    
+    let time = "/jwapp/sys/wdkb/modules/jshkcb/jc.do"
     let timeJson = (await reqest("post",null,time,null)).datas.jc.rows
-    let time_extra = 'https://ehall.uwh.edu.cn/jwmobile/biz/v410/common/school/time'
-    let time_extra_json = await reqest("post",null,time_extra,{'Content-Type': 'application/json;charset=UTF-8'})
     let secs = []
     timeJson.forEach(v=>{
         secs.push({
@@ -93,8 +94,8 @@ async function scheduleTimer() {
     })
 
   return {
-    'totalWeek': time_extra_json.maxWeekNum, // 总周数：[1, 30]之间的整数
-    'startSemester': new Date(time_extra_json.weekCalendar[0].split(":")[0]).getTime().toString(), // 开学时间：时间戳，13位长度字符串，推荐用代码生成
+    'totalWeek': providerRes.maxWeekNum, // 总周数：[1, 30]之间的整数
+    'startSemester': providerRes.start_day, // 开学时间：时间戳，13位长度字符串，推荐用代码生成
     'startWithSunday': false, // 是否是周日为起始日，该选项为true时，会开启显示周末选项
     'showWeekend': false, // 是否显示周末
     'forenoon': 4, // 上午课程节数：[1, 10]之间的整数
