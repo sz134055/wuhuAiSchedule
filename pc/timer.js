@@ -91,7 +91,7 @@ async function scheduleTimer() {
 
   return {
     'totalWeek': 17, // 总周数：[1, 30]之间的整数
-    'startSemester': '1708876800', // 开学时间：时间戳，13位长度字符串，推荐用代码生成 //2024-02-26 00:00:00
+    'startSemester': '1708876800000', // 开学时间：时间戳，13位长度字符串，推荐用代码生成 //2024-02-26 00:00:00
     'startWithSunday': false, // 是否是周日为起始日，该选项为true时，会开启显示周末选项
     'showWeekend': false, // 是否显示周末
     'forenoon': 4, // 上午课程节数：[1, 10]之间的整数
