@@ -15,7 +15,7 @@ function scheduleHtmlParser(html) {
 
         Courses[c.kcm].push({
             name: c.kcm,
-            position:c.jxlmc,
+            position:c.jasmc?(c.jxlmc+c.jasmc.replace(c.jxlmc,'' )):c.jxlmc,
             teacher:info.teachers_info[c.kcm],
             weeks:[now_week],
             day:c.skxq,
